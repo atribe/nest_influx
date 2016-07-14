@@ -1,0 +1,2 @@
+@reboot /src/nest_push.py && date >> /var/log/cron.log
+*/1 * * * * /src/nest_push.py && date >> /var/log/cron.log
