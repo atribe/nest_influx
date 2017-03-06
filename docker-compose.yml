@@ -5,5 +5,5 @@ services:
     container_name: nest
     restart: always
     volumes:
-      - ./config:/config
+      - ./config:/src
       - /etc/localtime:/etc/localtime:ro

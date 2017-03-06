@@ -2,6 +2,7 @@
 
 import sys
 import nest
+import time
 
 from configobj import ConfigObj
 from influxdb import InfluxDBClient
@@ -43,8 +44,6 @@ structure_metrics = ['away',
 
 metrics_convert = ['temperature',
                    'target']
-
-
 
 def send_to_influx(metrics, host=IFLX_HOST, port=8086, user=IFLX_USER,
                    pwd=IFLX_PASS, db=IFLX_DB):
@@ -100,7 +99,12 @@ def gather_nest(u=USER, p=PASS):
                      'fields': {'value': structure.weather.current.humidity}})
 
     return data
-
-if __name__ == '__main__':
+    
+def pullFromNestPushToInfluxdb():
     data = gather_nest()
     send_to_influx(data)
+
+if __name__ == '__main__':
+    while True:
+        pullFromNestPushToInfluxdb()
+        time.sleep(300)
